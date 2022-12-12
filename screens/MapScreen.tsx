@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         padding: 14,
         
         borderBottomWidth: 2,
-        borderBottomColor: "#d4d4d4",
+        borderBottomColor: "#e7e5e4",
         
     },
     headerText: {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     actionsWrapper: {
-        paddingHorizontal: 22,
+        paddingHorizontal: 24,
     },
     searchButton: {
         flexDirection: "row",
@@ -67,9 +67,9 @@ const styles = StyleSheet.create({
     },
     searchView: {
         paddingHorizontal: 12,
-        paddingVertical: 8,
+        paddingVertical: 10,
         
-        backgroundColor: "#e5e5e5",
+        backgroundColor: "#f5f5f5",
         
         borderRadius: 999,
     },
