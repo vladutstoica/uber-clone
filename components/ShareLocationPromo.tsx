@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import {AntDesign} from '@expo/vector-icons';
 
 const ShareLocationPromo = () => {
