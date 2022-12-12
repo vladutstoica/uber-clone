@@ -11,12 +11,13 @@ const LocationSearchModal = () => {
                 <View style={{flexDirection: "row", alignItems: "center"}}>
                     <Image style={{width: 25, marginHorizontal: 12, aspectRatio: 0.5, resizeMode: "contain"}}
                            source={require("../assets/pickup-where.jpeg")}/>
-                    
+
                     <View style={{flex: 0, flexGrow: 1, flexBasis: "100%"}}>
                         <GooglePlacesAutocomplete
                             styles={{
                                 container: {
                                     flex: 0,
+                                    width: "80%",
                                 },
                                 textInput: {
                                     height: 32,
@@ -37,6 +38,7 @@ const LocationSearchModal = () => {
                             styles={{
                                 container: {
                                     flex: 0,
+                                    width: "80%",
                                 },
                                 textInput: {
                                     height: 32,
