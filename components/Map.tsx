@@ -1,6 +1,10 @@
 import MapView from "react-native-maps";
+import {useSelector} from "react-redux";
+import {setOrigin} from "../redux/slices/navSlice";
 
 const Map = () => {
+
+    
     return (
         <MapView
             style={{
