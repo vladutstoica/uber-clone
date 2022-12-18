@@ -31,6 +31,7 @@ const LocationSearchModal = () => {
                                 language: "en",
                             }}
                             onPress={(data, detail = null) => {
+                                console.log(detail?.geometry.location)
                                 dispatch(setOrigin({
                                     description: data.description,
                                     location: detail?.geometry.location
