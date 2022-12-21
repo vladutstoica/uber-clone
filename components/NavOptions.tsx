@@ -42,7 +42,8 @@ const NavOptions = () => {
                         <Text style={styles.itemText}>{item.title}</Text>
                     </View>
                 </TouchableOpacity>
-            )}/>
+            )}
+        />
     )
 }
 

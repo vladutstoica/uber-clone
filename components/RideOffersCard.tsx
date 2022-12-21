@@ -1,36 +1,52 @@
-import {Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
-import {useNavigation} from "@react-navigation/native";
-import {useSelector} from "react-redux";
-import {selectOrigin} from "../redux/slices/navSlice";
+import {Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {useState} from "react";
+
+const data = [
+    {
+        id: 0,
+        name: "UberX",
+        time: "22:30",
+        image: require("../assets/ride.webp"),
+    },
+    {
+        id: 1,
+        name: "UberLux",
+        time: "22:30",
+        image: require("../assets/Lux.png"),
+    },
+    {
+        id: 2,
+        name: "UberXL",
+        time: "22:30",
+        image: require("../assets/UberXL.png")
+    }
+];
 
 const RideOffersCard = () => {
-    const navigation = useNavigation();
-    const origin = useSelector(selectOrigin);
+    const [selected, setSelected] = useState(null);
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#fff"}}>
+            <View style={styles.headerWrapper}>
+                <Text style={styles.headerText}>Choose a trip</Text>
+            </View>
             <ScrollView>
-                <View style={styles.headerWrapper}>
-                    <Text style={styles.headerText}>Set your pick-up location</Text>
-                </View>
-                <View style={styles.headerWrapper}>
-                    <Text style={styles.headerText}>Set your pick-up location</Text>
-                </View>
-                <View style={styles.headerWrapper}>
-                    <Text style={styles.headerText}>Set your pick-up location</Text>
-                </View>
-                <View style={styles.headerWrapper}>
-                    <Text style={styles.headerText}>Set your pick-up location</Text>
-                </View>
-                <View style={styles.headerWrapper}>
-                    <Text style={styles.headerText}>Set your pick-up location</Text>
-                </View>
-                <View style={styles.headerWrapper}>
-                    <Text style={styles.headerText}>Set your pick-up location</Text>
-                </View>
-                <View style={styles.headerWrapper}>
-                    <Text style={styles.headerText}>Set your pick-up location</Text>
-                </View>
+                {data?.map((item) => (
+                    <TouchableOpacity
+                        key={item.id}
+                        style={[styles.offerWrapper, {borderColor: `${selected?.id === item?.id ? "black" : "transparent"}`}]}
+                        onPress={() => setSelected(item)}
+                    >
+                        <View style={styles.detailsWrapper}>
+                            <Image style={styles.offerImage} source={item.image}/>
+                            <View>
+                                <Text style={styles.nameText}>{item.name}</Text>
+                                <Text style={styles.timeText}>{item.time}</Text>
+                            </View>
+                        </View>
+                        <Text style={styles.priceText}>RON 32.77</Text>
+                    </TouchableOpacity>
+                ))}
             </ScrollView>
         </SafeAreaView>
     )
@@ -50,51 +66,38 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         textAlign: "center",
     },
-    actionsWrapper: {
-        paddingHorizontal: 24,
-    },
-    searchButton: {
+    offerWrapper: {
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center",
+        marginVertical: 8,
+        marginHorizontal: 12,
+        padding: 12,
 
-        paddingVertical: 16,
-
-        width: "100%",
+        borderColor: "transparent",
+        borderWidth: 3,
+        borderRadius: 12,
     },
-    originText: {
-        flex: 1,
-
-        fontSize: 16,
-        fontWeight: "500",
-        textAlign: "left",
+    detailsWrapper: {
+        flexDirection: "row",
     },
-    searchView: {
-        paddingHorizontal: 12,
-        paddingVertical: 10,
-        marginLeft: 16,
-
-        backgroundColor: "#f5f5f5",
-
-        borderRadius: 999,
+    offerImage: {
+        height: 60,
+        width: 80,
+        resizeMode: "contain",
     },
-    searchText: {
-        fontWeight: "500",
-    },
-    confirmButton: {
-        paddingVertical: 18,
-        backgroundColor: "#000",
-    },
-    confirmButtonDisabled: {
-        paddingVertical: 18,
-        backgroundColor: "#b9b9b9",
-    },
-    confirmText: {
-        color: "#fff",
-
+    nameText: {
         fontSize: 18,
         fontWeight: "500",
+    },
+    timeText: {
+        marginTop: 4,
 
-        textAlign: "center",
+        color: "525252",
+
+        fontSize: 14,
+    },
+    priceText: {
+        fontSize: 18,
+        fontWeight: "500",
     }
 });

@@ -7,7 +7,7 @@ const Others = () => {
     return (
         <TouchableOpacity
             style={styles.buttonWrapper}
-            onPress={() => navigation.navigate("MapScreen")}
+            onPress={() => navigation.navigate("LocationSearchModal")}
         >
             <Text style={styles.buttonText}>Enter pick-up location</Text>
         </TouchableOpacity>
