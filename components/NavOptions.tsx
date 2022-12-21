@@ -5,19 +5,19 @@ const data = [
     {
         id: "1",
         title: "Ride",
-        image: "../assets/ride.png",
+        image: require("../assets/ride.webp"),
         screen: "MapScreen"
     },
     {
         id: "2",
         title: "2 Wheels",
-        image: "../assets/2wheels.png",
+        image: require("../assets/2wheels.png"),
         screen: ""
     },
     {
         id: "3",
         title: "Reserve",
-        image: "../assets/reserve.png",
+        image: require("../assets/reserve.png"),
         screen: ""
     }
 ]
@@ -32,13 +32,13 @@ const NavOptions = () => {
             horizontal
             renderItem={({item}) => (
                 <TouchableOpacity
-                    style={[styles.itemWrapper, {backgroundColor: item.screen ? "#e5e5e5" : "#a3a3a3",}]}
+                    style={[styles.itemWrapper, {opacity: item.screen ? 1 : 0.4}]}
                     disabled={!item.screen}
                     onPress={() => navigation.navigate("MapScreen", {})}>
                     <View>
                         <Image
                             style={styles.itemImage}
-                            source={require("../assets/ride.png")}/>
+                            source={item.image}/>
                         <Text style={styles.itemText}>{item.title}</Text>
                     </View>
                 </TouchableOpacity>
@@ -57,7 +57,9 @@ const styles = StyleSheet.create({
     itemWrapper: {
         paddingHorizontal: 16,
         paddingVertical: 8,
-        
+
+        backgroundColor: "#e5e5e5",
+
         borderRadius: 12,
     },
     itemImage: {
