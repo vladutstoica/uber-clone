@@ -2,10 +2,12 @@ import GoBackButton from "@components/GoBackButton";
 import {Image, SafeAreaView, View, Text, StyleSheet} from "react-native";
 import {GooglePlacesAutocomplete} from "react-native-google-places-autocomplete";
 import {GOOGLE_MAPS_API_KEY} from "@env";
-import {useDispatch} from "react-redux";
-import {setDestination, setOrigin} from "../redux/slices/navSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectDestination, selectOrigin, setDestination, setOrigin} from "../redux/slices/navSlice";
 
 const LocationSearchModal = () => {
+    const origin = useSelector(selectOrigin);
+    const destination = useSelector(selectDestination);
     const dispatch = useDispatch();
 
     return (
@@ -25,13 +27,12 @@ const LocationSearchModal = () => {
                     <View style={{flex: 0, flexGrow: 1, flexBasis: "100%"}}>
                         <GooglePlacesAutocomplete
                             styles={googlePlacesAutocompletePickupStyle}
-                            placeholder={"Pickup Location"}
+                            placeholder={`${ origin?.description ? origin.description : "Pickup Location" }`}
                             query={{
                                 key: GOOGLE_MAPS_API_KEY,
                                 language: "en",
                             }}
                             onPress={(data, detail = null) => {
-                                console.log(detail?.geometry.location)
                                 dispatch(setOrigin({
                                     description: data.description,
                                     location: detail?.geometry.location
@@ -47,14 +48,15 @@ const LocationSearchModal = () => {
                             minLength={2}/>
                         <GooglePlacesAutocomplete
                             styles={googlePlacesAutocompleteWheretoStyle}
-                            placeholder={"Where to go?"}
+                            placeholder={`${destination?.description ? destination.description : "Where to go?"}`}
                             query={{
                                 key: GOOGLE_MAPS_API_KEY,
                                 language: "en",
                             }}
                             onPress={(data, detail = null) => {
                                 dispatch(setDestination({
-                                    destination: detail?.geometry.location
+                                    description: data?.description,
+                                    location: detail?.geometry.location
                                 }))
                             }}
                             nearbyPlacesAPI={"GooglePlacesSearch"}
