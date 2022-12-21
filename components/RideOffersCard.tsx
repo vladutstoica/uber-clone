@@ -14,13 +14,13 @@ const data = [
     {
         id: 1,
         name: "UberXL",
-        image: require("../assets/UberXL.png"),
+        image: require("../assets/uberXL.png"),
         multiplier: 1.2,
     },
     {
         id: 2,
         name: "UberLux",
-        image: require("../assets/Lux.png"),
+        image: require("../assets/uber-lux.png"),
         multiplier: 1.75,
     },
 ];
