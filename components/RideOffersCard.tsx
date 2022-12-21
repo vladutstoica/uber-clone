@@ -1,34 +1,38 @@
 import {Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {useState} from "react";
+import {useSelector} from "react-redux";
+import {selectTravelTimeInformation} from "../redux/slices/navSlice";
 
+const SURGE_CHARGE_RATE = 1.5;
 const data = [
     {
         id: 0,
         name: "UberX",
-        time: "22:30",
         image: require("../assets/ride.webp"),
+        multiplier: 1,
     },
     {
         id: 1,
-        name: "UberLux",
-        time: "22:30",
-        image: require("../assets/Lux.png"),
+        name: "UberXL",
+        image: require("../assets/UberXL.png"),
+        multiplier: 1.2,
     },
     {
         id: 2,
-        name: "UberXL",
-        time: "22:30",
-        image: require("../assets/UberXL.png")
-    }
+        name: "UberLux",
+        image: require("../assets/Lux.png"),
+        multiplier: 1.75,
+    },
 ];
 
 const RideOffersCard = () => {
     const [selected, setSelected] = useState(null);
+    const travelTimeInfo = useSelector(selectTravelTimeInformation)
 
     return (
         <SafeAreaView style={{flex: 1, backgroundColor: "#fff"}}>
             <View style={styles.headerWrapper}>
-                <Text style={styles.headerText}>Choose a trip</Text>
+                <Text style={styles.headerText}>Choose a trip - {travelTimeInfo.distance.text}</Text>
             </View>
             <ScrollView>
                 {data?.map((item) => (
@@ -41,10 +45,17 @@ const RideOffersCard = () => {
                             <Image style={styles.offerImage} source={item.image}/>
                             <View>
                                 <Text style={styles.nameText}>{item.name}</Text>
-                                <Text style={styles.timeText}>{item.time}</Text>
+                                <Text style={styles.timeText}>{travelTimeInfo.duration.text}</Text>
                             </View>
                         </View>
-                        <Text style={styles.priceText}>RON 32.77</Text>
+                        <Text style={styles.priceText}>
+                            {new Intl.NumberFormat("en-GB", {
+                                style: "currency",
+                                currency: "RON"
+                            }).format(
+                                (travelTimeInfo?.duration.value * SURGE_CHARGE_RATE * item.multiplier / 100)
+                            )}
+                        </Text> 
                     </TouchableOpacity>
                 ))}
             </ScrollView>
